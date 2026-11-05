@@ -4,6 +4,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 20f;
     [SerializeField] private float lifetime = 3f;
+    [SerializeField] private int damage = 25;
 
     private void Start()
     {
@@ -22,6 +23,13 @@ public class Bullet : MonoBehaviour
             Physics.DefaultRaycastLayers,
             QueryTriggerInteraction.Ignore))
         {
+            Health health = hit.collider.GetComponentInParent<Health>();
+
+            if (health != null)
+            {
+                health.TakeDamage(damage);
+            }
+
             transform.position = hit.point;
             Destroy(gameObject);
             return;
