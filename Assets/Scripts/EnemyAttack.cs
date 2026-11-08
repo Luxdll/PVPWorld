@@ -1,30 +1,27 @@
 using UnityEngine;
 
-[RequireComponent(typeof(TeamMember))]
+[RequireComponent(typeof(TeamMember), typeof(TargetFinder))]
 public class EnemyAttack : MonoBehaviour
 {
-    [SerializeField] private Health target;
     [SerializeField] private int damage = 10;
     [SerializeField] private float attackRange = 1.8f;
     [SerializeField] private float attackInterval = 1f;
 
     private TeamMember teamMember;
-    private TeamMember targetTeam;
+    private TargetFinder targetFinder;
     private float nextAttackTime;
 
     private void Awake()
     {
         teamMember = GetComponent<TeamMember>();
-
-        if (target != null)
-        {
-            targetTeam = target.GetComponentInParent<TeamMember>();
-        }
+        targetFinder = GetComponent<TargetFinder>();
     }
 
     private void Update()
     {
-        if (target == null || !teamMember.IsEnemy(targetTeam))
+        Health target = targetFinder.CurrentTarget;
+
+        if (target == null || Time.time < nextAttackTime)
             return;
 
         Vector3 direction =
@@ -34,7 +31,10 @@ public class EnemyAttack : MonoBehaviour
         if (direction.sqrMagnitude > attackRange * attackRange)
             return;
 
-        if (Time.time < nextAttackTime)
+        TeamMember targetTeam =
+            target.GetComponentInParent<TeamMember>();
+
+        if (!teamMember.IsEnemy(targetTeam))
             return;
 
         target.TakeDamage(damage);
