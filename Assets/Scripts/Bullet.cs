@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float lifetime = 3f;
     [SerializeField] private int damage = 25;
 
+    private TeamId sourceTeam;
+
     private void Start()
     {
         Destroy(gameObject, lifetime);
@@ -24,8 +26,11 @@ public class Bullet : MonoBehaviour
             QueryTriggerInteraction.Ignore))
         {
             Health health = hit.collider.GetComponentInParent<Health>();
+            TeamMember hitTeam = hit.collider.GetComponentInParent<TeamMember>();
 
-            if (health != null)
+            if (health != null &&
+                hitTeam != null &&
+                hitTeam.Team != sourceTeam)
             {
                 health.TakeDamage(damage);
             }
@@ -36,5 +41,10 @@ public class Bullet : MonoBehaviour
         }
 
         transform.position += transform.forward * distance;
+    }
+
+    public void Initialize(TeamId team)
+    {
+        sourceTeam = team;
     }
 }

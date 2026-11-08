@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(TeamMember))]
 public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] private Bullet bulletPrefab;
@@ -8,6 +9,12 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private float fireInterval = 0.25f;
 
     private float nextShotTime;
+    private TeamMember teamMember;
+
+    private void Awake()
+    {
+        teamMember = GetComponent<TeamMember>();
+    }
 
     private void LateUpdate()
     {
@@ -19,11 +26,13 @@ public class PlayerShooting : MonoBehaviour
         if (!mouse.leftButton.isPressed || Time.time < nextShotTime)
             return;
 
-        Instantiate(
+        Bullet bullet = Instantiate(
             bulletPrefab,
             firePoint.position,
             firePoint.rotation
         );
+
+        bullet.Initialize(teamMember.Team);
 
         nextShotTime = Time.time + fireInterval;
     }
