@@ -6,6 +6,8 @@ public class Health : MonoBehaviour
 
     private int currentHealth;
 
+    public event System.Action Died;
+
     private void Awake()
     {
         currentHealth = maxHealth;
@@ -20,6 +22,7 @@ public class Health : MonoBehaviour
 
         if (currentHealth == 0)
         {
+            Died?.Invoke();
             Destroy(gameObject);
         }
     }
