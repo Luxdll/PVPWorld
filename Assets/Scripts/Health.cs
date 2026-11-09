@@ -6,6 +6,10 @@ public class Health : MonoBehaviour
 
     private int currentHealth;
 
+    public int CurrentHealth => currentHealth;
+    public int MaxHealth => maxHealth;
+
+    public event System.Action<int, int> Changed;
     public event System.Action Died;
 
     private void Awake()
@@ -19,6 +23,7 @@ public class Health : MonoBehaviour
             return;
 
         currentHealth = Mathf.Max(0, currentHealth - damage);
+        Changed?.Invoke(currentHealth, maxHealth);
 
         if (currentHealth == 0)
         {
