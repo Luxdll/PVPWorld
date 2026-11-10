@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 2398016527864174464}
   - component: {fileID: 5521323720307159802}
   - component: {fileID: 342189584812328093}
-  - component: {fileID: 8739465777362301795}
   - component: {fileID: 6595116956928905007}
   - component: {fileID: 3611474588436571083}
+  - component: {fileID: 8415827175137112815}
   m_Layer: 0
   m_Name: SurvivorMinion
   m_TagString: Untagged
@@ -38,6 +38,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6714833757966934260}
+  - {fileID: 7408533409811152776}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6059423519589411353
@@ -106,6 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  destroyOnDeath: 1
 --- !u!143 &5521323720307159802
 CharacterController:
   m_ObjectHideFlags: 0
@@ -144,22 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2.5
-  stoppingDistance: 1.5
---- !u!114 &8739465777362301795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35311044550878305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 009101f079ac2e94a9e82135db434ac6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  attackRange: 1.8
-  attackInterval: 1
+  stoppingDistance: 4.5
 --- !u!114 &6595116956928905007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +174,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   searchInterval: 0.25
   currentTarget: {fileID: 0}
+--- !u!114 &8415827175137112815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35311044550878305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7128f53fb58d2f489ad93ccd64ca094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 982398731317354158, guid: b420fb973131c1e4bbd4ee4ceca8df54, type: 3}
+  firePoint: {fileID: 7408533409811152776}
+  attackRange: 5
+  fireInterval: 1
+--- !u!1 &7680385064876330503
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7408533409811152776}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7408533409811152776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7680385064876330503}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6798800702976576907}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &144366356872397915
 PrefabInstance:
   m_ObjectHideFlags: 0
