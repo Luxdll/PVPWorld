@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MatchManager : MonoBehaviour
 {
@@ -66,6 +67,18 @@ public class MatchManager : MonoBehaviour
         resultPanel.SetActive(true);
 
         Time.timeScale = 0f;
+    }
+
+    public void RestartMatch()
+    {
+        if (!isFinished)
+            return;
+
+        Time.timeScale = 1f;
+
+        SceneManager.LoadScene(
+            SceneManager.GetActiveScene().buildIndex
+        );
     }
 
     private void OnDestroy()
