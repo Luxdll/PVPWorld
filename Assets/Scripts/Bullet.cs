@@ -17,20 +17,31 @@ public class Bullet : MonoBehaviour
     {
         float distance = speed * Time.deltaTime;
 
-        if (Physics.Raycast(
+        RaycastHit[] hits = Physics.RaycastAll(
             transform.position,
             transform.forward,
-            out RaycastHit hit,
             distance,
             Physics.DefaultRaycastLayers,
-            QueryTriggerInteraction.Ignore))
-        {
-            Health health = hit.collider.GetComponentInParent<Health>();
-            TeamMember hitTeam = hit.collider.GetComponentInParent<TeamMember>();
+            QueryTriggerInteraction.Ignore
+        );
 
-            if (health != null &&
-                hitTeam != null &&
-                hitTeam.Team != sourceTeam)
+        System.Array.Sort(
+            hits,
+            (a, b) => a.distance.CompareTo(b.distance)
+        );
+
+        foreach (RaycastHit hit in hits)
+        {
+            TeamMember hitTeam =
+                hit.collider.GetComponentInParent<TeamMember>();
+
+            if (hitTeam != null && hitTeam.Team == sourceTeam)
+                continue;
+
+            Health health =
+                hit.collider.GetComponentInParent<Health>();
+
+            if (health != null && hitTeam != null)
             {
                 health.TakeDamage(damage);
             }
