@@ -9,6 +9,8 @@ public class MatchManager : MonoBehaviour
 
     private bool isFinished;
 
+    public bool IsFinished => isFinished;
+
     private void Start()
     {
         if (survivorsBase == null || infectedBase == null ||

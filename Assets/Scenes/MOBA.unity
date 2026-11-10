@@ -623,6 +623,11 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &602700231 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4417923967477327061, guid: 91f415bf004823c40b619aa9875e3701, type: 3}
+  m_PrefabInstance: {fileID: 8375484556279202663}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &602700232 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6858707174987539631, guid: 91f415bf004823c40b619aa9875e3701, type: 3}
@@ -1179,6 +1184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 300
+  destroyOnDeath: 1
 --- !u!65 &902152329
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1465,6 +1471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 300
+  destroyOnDeath: 1
 --- !u!65 &960381666
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1621,6 +1628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 200
+  destroyOnDeath: 1
 --- !u!114 &1196690131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2128,6 +2136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 200
+  destroyOnDeath: 1
 --- !u!136 &1554938480
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2683,6 +2692,7 @@ GameObject:
   - component: {fileID: 2045200533}
   - component: {fileID: 2045200534}
   - component: {fileID: 2045200535}
+  - component: {fileID: 2045200536}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2786,6 +2796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  destroyOnDeath: 0
 --- !u!114 &2045200535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2799,6 +2810,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 0
+--- !u!114 &2045200536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045200528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4fcfb46a129ae248bb95d27d7183902, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visual: {fileID: 269673878}
+  healthBar: {fileID: 602700231}
+  matchManager: {fileID: 1937394568}
+  respawnDelay: 10
 --- !u!1001 &2170567082662579235
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -35,7 +35,7 @@ public class TargetFinder : MonoBehaviour
 
         foreach (Health candidate in candidates)
         {
-            if (!candidate.isActiveAndEnabled)
+            if (!candidate.isActiveAndEnabled || !candidate.IsAlive)
                 continue;
 
             TeamMember candidateTeam =

@@ -3,11 +3,13 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 100;
+    [SerializeField] private bool destroyOnDeath = true;
 
     private int currentHealth;
 
     public int CurrentHealth => currentHealth;
     public int MaxHealth => maxHealth;
+    public bool IsAlive => currentHealth > 0;
 
     public event System.Action<int, int> Changed;
     public event System.Action Died;
@@ -28,7 +30,17 @@ public class Health : MonoBehaviour
         if (currentHealth == 0)
         {
             Died?.Invoke();
-            Destroy(gameObject);
+
+            if (destroyOnDeath)
+            {
+                Destroy(gameObject);
+            }
         }
+    }
+
+    public void RestoreFullHealth()
+    {
+        currentHealth = maxHealth;
+        Changed?.Invoke(currentHealth, maxHealth);
     }
 }

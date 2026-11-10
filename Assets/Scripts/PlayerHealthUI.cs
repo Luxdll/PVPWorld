@@ -6,6 +6,8 @@ public class PlayerHealthUI : MonoBehaviour
     [SerializeField] private Health playerHealth;
 
     private TMPro.TMP_Text healthText;
+    private PlayerRespawn playerRespawn;
+    private int lastDisplayedSecond = -1;
 
     private void Awake()
     {
@@ -27,6 +29,8 @@ public class PlayerHealthUI : MonoBehaviour
             return;
         }
 
+        playerRespawn = playerHealth.GetComponent<PlayerRespawn>();
+
         playerHealth.Changed += OnHealthChanged;
         playerHealth.Died += OnPlayerDied;
 
@@ -36,8 +40,23 @@ public class PlayerHealthUI : MonoBehaviour
         );
     }
 
+    private void Update()
+    {
+        if (playerRespawn == null || !playerRespawn.IsRespawning)
+            return;
+
+        int seconds = Mathf.CeilToInt(playerRespawn.RemainingTime);
+
+        if (seconds == lastDisplayedSecond)
+            return;
+
+        lastDisplayedSecond = seconds;
+        healthText.text = $"RESPAWN: {seconds}";
+    }
+
     private void OnHealthChanged(int current, int maximum)
     {
+        lastDisplayedSecond = -1;
         healthText.text = $"HP: {current} / {maximum}";
     }
 
